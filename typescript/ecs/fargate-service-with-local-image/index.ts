@@ -16,7 +16,7 @@ vpc = ec2.Vpc.from_lookup(stack, "VPC",
     # This imports the default VPC but you can also
     # specify a 'vpcName' or 'tags'.
     is_default=False,
-    vpc_id = vpc-097fedf3787889d3a
+    vpc_id = 'vpc-097fedf3787889d3a'
 )
 const cluster = new ecs.Cluster(stack, 'Wise-Cluster', { vpc });
 
