@@ -25,8 +25,11 @@ const cluster = new ecs.Cluster(stack, 'Wise-Cluster', { vpc });
 new ecs_patterns.ApplicationLoadBalancedFargateService(stack, "FargateService", {
   cluster,
   taskImageOptions: {
-    image: ecs.ContainerImage.fromAsset(path.resolve(__dirname, 'local-image'))
+    image: ecs.ContainerImage.fromRegistry('nginx'),
   },
+  environment: {
+     PLATFORM: 'Amazon ECS---Move Move Move'
+   },
 });
 
 app.synth();
