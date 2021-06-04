@@ -9,8 +9,16 @@ const stack = new cdk.Stack(app, 'FargateServiceWithLocalImage');
 
 // Create VPC and Fargate Cluster
 // NOTE: Limit AZs to avoid reaching resource quotas
-const vpc = new ec2.Vpc(stack, 'MyVpc', { maxAzs: 2 });
-const cluster = new ecs.Cluster(stack, 'Cluster', { vpc });
+// const vpc = new ec2.Vpc(stack, 'MyVpc', { maxAzs: 2 });
+
+# Retrieve VPC information
+vpc = ec2.Vpc.from_lookup(stack, "VPC",
+    # This imports the default VPC but you can also
+    # specify a 'vpcName' or 'tags'.
+    is_default=False,
+    vpc_id = vpc-097fedf3787889d3a
+)
+const cluster = new ecs.Cluster(stack, 'Wise-Cluster', { vpc });
 
 // Instantiate Fargate Service with a cluster and a local image that gets
 // uploaded to an S3 staging bucket prior to being uploaded to ECR.
