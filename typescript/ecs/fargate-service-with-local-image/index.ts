@@ -4,12 +4,12 @@ import ecs_patterns = require('@aws-cdk/aws-ecs-patterns');
 import cdk = require('@aws-cdk/core');
 import path = require('path');
 
+const env = {
+     region: app.node.tryGetContext('region') || process.env.CDK_INTEG_REGION || process.env.CDK_DEFAULT_REGION,	 
+    account: app.node.tryGetContext('account') || process.env.CDK_INTEG_ACCOUNT || process.env.CDK_DEFAULT_ACCOUNT
+};
 const app = new cdk.App();
-const stack = new cdk.Stack(app, 'FargateServiceWithLocalImage');
-  env={
-    'account': os.environ['CDK_DEFAULT_ACCOUNT'], 
-    'region': os.environ['CDK_DEFAULT_REGION']
-  };
+const stack = new cdk.Stack(app, 'FargateServiceWithLocalImage', env);
 
 // Create VPC and Fargate Cluster
 // NOTE: Limit AZs to avoid reaching resource quotas
